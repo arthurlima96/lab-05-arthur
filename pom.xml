@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>dcomo.es2.laboratorio05</groupId>
+    <groupId>dcomp.es2.laboratorio05</groupId>
     <artifactId>lab-05-arthur</artifactId>
     <version>1.0</version>
 
