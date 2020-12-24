@@ -258,29 +258,6 @@ public class FreteControllerTest {
 		assertNull(resposta);
 	}
 
-	@Test
-	public void naoDeveSalvarFreteComErroDeValidacao() {
-
-		cidadeRepository.save(new Cidade("São Luis", "MA", new BigDecimal(40.0)));
-		cidadeRepository.save(new Cidade("Bacabal", "MA", new BigDecimal(70.0)));
-		cidadeRepository.save(new Cidade("Barrerinhas", "MA", new BigDecimal(60.0)));
-
-		Cliente cliente = new Cliente("Arthur Lima", "Rua Quarenta e Cinco, 31","(98)98306-4375");
-		clienteRepository.save(cliente);
-
-		frete.setCliente(null);
-		frete.setCidade(cidadeRepository.findByNome("Barrerinhas"));
-
-		HttpEntity<Frete> httpEntity = new HttpEntity<>(frete);
-
-		ResponseEntity<List<String>> resposta =
-				testRestTemplate.exchange("/rota/cadastrar",
-						HttpMethod.POST,httpEntity,
-						new ParameterizedTypeReference<List<String>>() {});
-
-		assertEquals(HttpStatus.BAD_REQUEST,resposta.getStatusCode());
-		assertTrue(resposta.getBody().contains("O cliente deve ser preenchido"));
-	}
 
 	@Test
 	public void deveSalvarFrete() {
